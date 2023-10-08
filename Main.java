@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -18,6 +19,11 @@ public class Main {
     // Test repeatedNamesHashSet
     System.out.println("repeatedNamesHashSet: " + repeatedNamesHashSet(new String[] {"Alice", "Bob", "Alice"})); // true
     System.out.println("repeatedNamesHashSet: " + repeatedNamesHashSet(new String[] {"Alice", "Bob", "Carol"})); // false
+
+    // Test repeatedNamesCompareLength
+    System.out.println("repeatedNamesCompareLength: " + repeatedNamesCompareLength(new String[] {"Alice", "Bob", "Alice"})); // true
+    System.out.println("repeatedNamesCompareLength: " + repeatedNamesCompareLength(new String[] {"Alice", "Bob", "Carol"})); // false
+   
 
     }
 
@@ -49,7 +55,7 @@ public class Main {
         return false;
     }
 
-    // Time complexity O(n) (HashSet operations are generally O(1))
+    // Time complexity O(n)
     public static boolean repeatedNamesHashSet(String[] nameList) {
         Set<String> nameSet = new HashSet<>();
         for (String name : nameList) {
@@ -59,6 +65,12 @@ public class Main {
             nameSet.add(name);
         }
         return false;
+    }
+
+    // Time complexity O(n)
+    public static boolean repeatedNamesCompareLength(String[] nameList) {
+        Set<String> nameSet = new HashSet<>(Arrays.asList(nameList));
+        return nameList.length != nameSet.size();
     }
 
     public static int[] sortList(int[] numberList) {
