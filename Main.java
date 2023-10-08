@@ -23,7 +23,10 @@ public class Main {
     // Test repeatedNamesCompareLength
     System.out.println("repeatedNamesCompareLength: " + repeatedNamesCompareLength(new String[] {"Alice", "Bob", "Alice"})); // true
     System.out.println("repeatedNamesCompareLength: " + repeatedNamesCompareLength(new String[] {"Alice", "Bob", "Carol"})); // false
-   
+
+    // Test sortList
+    System.out.println("sortList: " + Arrays.toString(sortList(new int[] {3, 1, 4, 1, 5, 9}))); // [1, 1, 3, 4, 5, 9]
+    
 
     }
 
@@ -68,12 +71,29 @@ public class Main {
     }
 
     // Time complexity O(n)
+    // HashSet can't have duplicates, so we can just compare to array length
     public static boolean repeatedNamesCompareLength(String[] nameList) {
         Set<String> nameSet = new HashSet<>(Arrays.asList(nameList));
         return nameList.length != nameSet.size();
     }
 
+    // Time complexity O(n^2) (Bubble sort)
     public static int[] sortList(int[] numberList) {
+        boolean sorted = false;
+        int n = numberList.length - 1;
+
+        while (!sorted) {
+            sorted = true;
+            for (int i = 0; i < n; i++) {
+                if (numberList[i] > numberList[i + 1]) {
+                    // No tuple unpacking in Java. Make temp variable to swap.
+                    int temp = numberList[i];
+                    numberList[i] = numberList[i + 1];
+                    numberList[i + 1] = temp;
+                    sorted = false;
+                }
+            }
+        }
         return numberList;
     }
 }
