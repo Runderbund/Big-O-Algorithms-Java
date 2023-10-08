@@ -26,7 +26,9 @@ public class Main {
 
     // Test sortList
     System.out.println("sortList: " + Arrays.toString(sortList(new int[] {3, 1, 4, 1, 5, 9}))); // [1, 1, 3, 4, 5, 9]
-    
+
+    // Test sortListAlt
+    System.out.println("sortListAlt: " + Arrays.toString(sortListAlt(new int[] {3, 1, 4, 1, 2, 9}))); // [1, 1, 2, 3, 4, 9]   
 
     }
 
@@ -95,6 +97,42 @@ public class Main {
             }
         }
         return numberList;
+    }
+
+    // Time complexity O(n log n) (Merge sort)
+    public static int[] sortListAlt(int[] numberList) {
+        if (numberList.length <= 1) {
+            return numberList;
+        }
+
+        int mid = numberList.length / 2;
+        int[] leftHalf = Arrays.copyOfRange(numberList, 0, mid);
+        int[] rightHalf = Arrays.copyOfRange(numberList, mid, numberList.length);
+
+        return merge(sortListAlt(leftHalf), sortListAlt(rightHalf));
+    }
+
+    public static int[] merge(int[] left, int[] right) {
+        int[] result = new int[left.length + right.length];
+        int i = 0, j = 0, k = 0;
+
+        while (i < left.length && j < right.length) {
+            if (left[i] < right[j]) {
+                result[k++] = left[i++];
+            } else {
+                result[k++] = right[j++];
+            }
+        }
+
+        while (i < left.length) {
+            result[k++] = left[i++];
+        }
+
+        while (j < right.length) {
+            result[k++] = right[j++];
+        }
+
+        return result;
     }
 }
 
