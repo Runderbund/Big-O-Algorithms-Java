@@ -1,3 +1,6 @@
+import java.util.HashSet;
+import java.util.Set;
+
 public class Main {
     public static void main(String[] args) {
     // Test evenOrOdd
@@ -11,6 +14,11 @@ public class Main {
     // Test repeatedNames
     System.out.println("repeatedNames: " + repeatedNames(new String[] {"Alice", "Bob", "Carol", "Alice"})); // true
     System.out.println("repeatedNames: " + repeatedNames(new String[] {"Alice", "Bob", "Carol"})); // false
+
+    // Test repeatedNamesHashSet
+    System.out.println("repeatedNamesHashSet: " + repeatedNamesHashSet(new String[] {"Alice", "Bob", "Alice"})); // true
+    System.out.println("repeatedNamesHashSet: " + repeatedNamesHashSet(new String[] {"Alice", "Bob", "Carol"})); // false
+
     }
 
 
@@ -41,8 +49,16 @@ public class Main {
         return false;
     }
 
+    // Time complexity O(n) (HashSet operations are generally O(1))
     public static boolean repeatedNamesHashSet(String[] nameList) {
-        return true;
+        Set<String> nameSet = new HashSet<>();
+        for (String name : nameList) {
+            if (nameSet.contains(name)) {
+                return true;
+            }
+            nameSet.add(name);
+        }
+        return false;
     }
 
     public static int[] sortList(int[] numberList) {
